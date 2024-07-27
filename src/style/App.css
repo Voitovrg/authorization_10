@@ -2,29 +2,80 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /*outline: 1px solid greenyellow;*/
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App {
-  text-align: center;
-  color: black;
-  font-size: 25px;
-}
-
-.App .main-box {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-.App .main-box .main-container {
+form {
   display: flex;
-  width: 450px;
-  height: 400px;
-  border-radius: 16px;
   flex-direction: column;
-  box-sizing: border-box;
+  width: 350px;
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+  outline: rgba(0, 0, 0, 0.26) 1px solid;
+  border-radius: 10px;
+}
+
+input {
+  width: 250px;
+  height: 40px;
+  border-radius: 8px;
+  padding-left: 10px;
+  border: none;
+  outline: rgba(0, 0, 0, 0.26) 1px solid;
+  cursor: auto;
+  margin: 10px;
+}
+
+.box-h1 {
+  width: 100%;
+  padding-left: 40px;
+
+}
+
+h1 {
+  font-size: 38px;
+  padding: 10px;
+}
+
+input:focus {
+  outline: 1px black solid;
+}
+
+.box-Btn {
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
+button {
+  background: none;
+  border: none;
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  outline: rgba(0, 0, 0, 0.26) 1px solid;
+  font-size: 16px;
+}
+
+button:focus {
+  outline: black solid 1px;
+}
+
+button:hover {
+  outline: black solid 1px;
+}
+
+.input-error {
+  outline: 1px solid rgba(255, 0, 0, 0.50);
 }
