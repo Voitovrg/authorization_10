@@ -1,5 +1,5 @@
 import React, {useEffect, useState, ChangeEvent, FocusEvent} from 'react';
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import './style/App.css'
 
 
@@ -10,10 +10,47 @@ const App: React.FC = () => {
     const [passwordDirty, setPasswordDirty] = useState(false)
     const [emailError, setEmailError] = useState(''); // Ошибка если поле будет пустое
     const [passwordError, setPasswordError] = useState(''); // Ошибка если поле будет пустое
-    const [formValid, setFormValid] = useState(false)
+
+    const [formValid, setFormValid] = useState<boolean>(false)
+    // const [findUsers, setFindUsers] = useState<boolean>(false)
+
+    const [validMessage, setValidMessage] = useState<string>('')
+
+    interface UserExistsResponse {
+        body: {
+            code: number;
+            message: string;
+            status: string;
+        };
+        status_code: number;
+    }
+
+    const checkUserExist = async (email: string, password: string): Promise<void> => {
+        try {
+            const response: AxiosResponse<UserExistsResponse> = await axios.get('http://142.93.134.108:1111/login', {
+                params: {email, password}
+            })
+
+            if (response.data.status_code === 401 || response.data.body.status === 'error') {
+                setValidMessage(response.data.body.message);
+                console.log('User not exist');
+            } else {
+                setValidMessage(response.data.body.status);
+                console.log(validMessage)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleSignIn = async () => {
+        if (formValid) {
+            await checkUserExist(email, password);
+        }
+    };
 
     useEffect(() => {
-        if (emailError || passwordError) {
+        if (emailError || passwordError || email.length === 0 || password.length === 0) {
             setFormValid(false)
         } else {
             setFormValid(true)
@@ -63,7 +100,7 @@ const App: React.FC = () => {
                 </div>
                 <input onChange={e => emailHandler(e)}
                        onBlur={e => blurHandler(e)}
-                       className={`email ${emailDirty && emailError ? 'input-error': ''}`}
+                       className={`email ${emailDirty && emailError ? 'input-error' : ''}`}
                        type="email"
                        placeholder='Login'
                        name='email'
@@ -71,7 +108,7 @@ const App: React.FC = () => {
                 />
                 <input onChange={e => passwordHandler(e)}
                        onBlur={e => blurHandler(e)}
-                       className={`password ${passwordDirty && passwordError ? 'input-error': ''}`}
+                       className={`password ${passwordDirty && passwordError ? 'input-error' : ''}`}
                        type="password"
                        placeholder='Password'
                        name='password'
@@ -79,10 +116,11 @@ const App: React.FC = () => {
                 />
 
                 <div className='box-Btn'>
-                    <button disabled={!formValid} type='submit' tabIndex={0}>Sign in</button>
-                    <button type='submit' tabIndex={0}>Sign up</button>
+                    <button onClick={handleSignIn} disabled={!formValid} type='button' tabIndex={0}>Sign in</button>
+                    <button type='button' tabIndex={0}>Sign up</button>
                 </div>
             </form>
+            <p>{validMessage}</p>
         </div>
     );
 }
