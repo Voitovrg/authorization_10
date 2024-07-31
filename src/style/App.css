@@ -1,90 +1,150 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    /*outline: black solid 1px;*/
+    letter-spacing: 0.3px;
+
 }
 
 .App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-}
-
-.App p {
-  font-size: 18px;
-  position: absolute; /* Абсолютное позиционирование */
-  top: 58.5%; /* Расположение элемента по вертикали в 50% от высоты экрана */
-  left: 50%; /* Расположение элемента по горизонтали в 50% от ширины экрана */
-  transform: translate(-50%, -50%); /* Смещение элемента на 50% его ширины и высоты */
-
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  height: 300px;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 380px;
+    align-items: center;
+    justify-content: center;
+    outline: rgba(0, 0, 0, 0.26) solid 1px;
+    border-radius: 26px;
+}
+
+form div {
+    margin: 15px;
+}
+
+.box-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 100%;
+    height: 110px;
+    margin: 15px;
 }
 
 input {
-  width: 250px;
-  height: 40px;
-  border-radius: 8px;
-  padding-left: 10px;
-  border: none;
-  outline: rgba(0, 0, 0, 0.26) 1px solid;
-  cursor: auto;
-  margin: 10px;
+    width: 270px;
+    height: 40px;
+    border-radius: 4px;
+    padding-left: 12px;
+    border: none;
+    cursor: auto;
+    border-bottom: rgba(0, 0, 0, 0.26) 1px solid;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: rgba(0, 0, 0, 0.8) 1px solid;
+}
+
+.input-error {
+    outline: none;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.7);
 }
 
 .box-h1 {
-  width: 100%;
-  padding-left: 40px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 
 }
 
 h1 {
-  font-size: 38px;
-  padding: 10px;
+    font-size: 42px;
+    padding: 5px;
 }
 
-input:focus {
-  outline: 1px black solid;
-}
 
 .box-Btn {
-  display: flex;
-  width: 250px;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px;
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
 }
 
 button {
-  background: none;
-  border: none;
-  width: 120px;
-  height: 40px;
-  border-radius: 8px;
-  outline: rgba(0, 0, 0, 0.26) 1px solid;
-  font-size: 16px;
+    display: flex;
+    background: none;
+    border: none;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    outline: rgba(0, 0, 0, 0.26) 1px solid;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
 }
 
 button:focus {
-  outline: black solid 1px;
+    outline: black solid 1px;
 }
 
 button:hover {
-  outline: black solid 1px;
+    outline: black solid 1px;
 }
 
-.input-error {
-  outline: 1px solid rgba(255, 0, 0, 0.50);
+button:disabled {
+    cursor: not-allowed;
+}
+
+.box-register {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    font-size: 14px;
+}
+
+.box-register a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.box-register a:hover {
+    text-decoration: none; /* Убирает подчеркивание при наведении */
+}
+
+.container-MeBtn {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+}
+
+.MeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 16px;
+    outline: rgba(0, 0, 0, 0.26) 1px solid;
+    text-decoration: none;
+    color: black;
+    width: 150px;
+    height: 40px;
 }
