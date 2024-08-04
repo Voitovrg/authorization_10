@@ -16,6 +16,14 @@ const Register: React.FC = () => {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const accessToken = localStorage.getItem('access_token');
+        if (accessToken) {
+            // Если токен есть, перенаправляем на страницу профиля
+            navigate('/me');
+        }
+    }, [navigate]);
+
     const handleRegister = async () => {
         if (formValid) {
             setLoading(true);

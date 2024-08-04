@@ -2,6 +2,7 @@
 
 export interface AuthResponse {
     statusCode: number;
+    status_code: number;
     code: number;
     message: string;
     status: string;

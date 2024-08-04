@@ -132,8 +132,8 @@ button:disabled {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 40%;
 
 }
 
@@ -142,9 +142,79 @@ button:disabled {
     align-items: center;
     justify-content: space-evenly;
     border-radius: 16px;
-    outline: rgba(0, 0, 0, 0.26) 1px solid;
+    border: 2px dashed rgba(0, 0, 0, 0.26);
     text-decoration: none;
+    outline: none;
     color: black;
-    width: 150px;
+    width: 200px;
+    height: 45px;
+}
+
+.MeBtn:hover {
+    outline: rgba(0, 0, 0, 0.26) 1px solid;
+    border: none;
+    background-color: rgba(186, 186, 186, 0.08)
+}
+
+.container-Text {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    width: 100%;
     height: 40px;
+    padding-left: 10px;
+}
+
+.container-Tokens {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container-ATokens {
+    display: flex;
+    width: 22%;
+    height: 100%;
+    align-items: center;
+}
+.refresh-button {
+    display: flex;
+    justify-content: flex-start;
+    border: none;
+    outline: none;
+    width: 22%;
+    height: 100%;
+    align-items: center;
+    text-decoration: underline;;
+}
+
+.refresh-button:hover {
+    border: none;
+    outline: none;
+    color: blue;
+    cursor: pointer;
+}
+
+.refresh-button:focus {
+    border: none;
+    outline: none;
+}
+
+.copy-button {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    border: 2px dashed rgba(0, 0, 0, 0.26);
+    text-decoration: none;
+    outline: none;
+}
+
+.copy-button:hover {
+    outline: rgba(0, 0, 0, 0.26) 1px solid;
+    border: none;
+    background-color: rgba(186, 186, 186, 0.08)
 }

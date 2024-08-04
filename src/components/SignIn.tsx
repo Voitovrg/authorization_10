@@ -3,7 +3,8 @@
 import React, { useState, ChangeEvent, FocusEvent, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthResponse } from '../types/AuthResponse'; // Импортируйте тип
+import { AuthResponse } from '../types/AuthResponse';
+import {useAuth} from "../contexts/AuthContext"; // Импортируйте тип
 
 const SignIn: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -17,7 +18,17 @@ const SignIn: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [regOffer, setRegOffer] = useState<boolean>(false);
     const [validMessage, setValidMessage] = useState<string>('');
+    const { setAuthData  } = useAuth()
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('access_token');
+        if (accessToken) {
+            // Если токен есть, перенаправляем на страницу профиля
+            navigate('/me');
+        }
+    }, [navigate]);
 
     const handleSignIn = async () => {
         if (formValid) {
@@ -29,18 +40,32 @@ const SignIn: React.FC = () => {
                     { params: { email, password } }
                 );
 
+                console.log(response.data)
+
                 if (response.data.statusCode === 200) {
-                    // Сохранение токенов
-                    localStorage.setItem('access_token', response.data.body.access_token);
-                    localStorage.setItem('refresh_token', response.data.body.refresh_token);
-                    console.log('access_token');
-                    console.log('refresh_token');
+                    const { access_token, refresh_token } = response.data.body;
+
+                    // Обновление данных аутентификации
+                    setAuthData({
+                        accessToken: access_token,
+                        refreshToken: refresh_token,
+                        email: email,
+                        password: password
+                    });
+
+                    // Сохранение в localStorage
+                    localStorage.setItem('access_token', access_token);
+                    localStorage.setItem('refresh_token', refresh_token);
+                    localStorage.setItem('saved_email', email);
+                    localStorage.setItem('saved_password', password);
+
                     navigate('/me');
                 }
 
-                if (response.data.statusCode === 401) {
+                if (response.data.status_code === 401) {
                     setValidMessage('User not found, please: ');
                     setRegOffer(true)
+                    console.log('User not found')
                 }
 
                 if (response.data.code === 1012) {
@@ -48,9 +73,11 @@ const SignIn: React.FC = () => {
                     setPassword('')
                     setPasswordWrong(true)
                     setPasswordError('is wrong, try again')
-
                 }
-            } catch (error) {
+            } catch (error: any) {
+                if (error.response) {
+                    console.log(error.response.data)
+                }
                 console.error('Error during sign-in:', error);
             } finally {
                 setLoading(false);
